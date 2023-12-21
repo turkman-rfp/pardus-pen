@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+name='pardus-pen'
+release='1'
+version='2.0.0'
+url='https://pardus.org.tr'
+description='Simple tool helps in order to draw something on screen.'
+email='aliriza.keskin@pardus.org.tr'
+maintainer='aliriza'
+license=('GPLv3')
+source=("https://github.com/pardus/pardus-pen/archive/refs/tags/debian/$version.tar.gz")
+depends=(qt5-base)
+makedepends=()
+md5sums=('dac28d2d573055d3042b9ff14188215b')
+group=()
+uses=()
+arch=('x86_64')
+
+cd $name-debian-$version
+
+export PATH=/usr/bin/qt5/:$PATH
+
+setup () {
+   qmake
+}
+
+build () {
+    make $jobs
+}
+
+package () {
+    make install $jobs INSTALL_ROOT=${DESTDIR} DESTDIR=${DESTDIR}
+}
+
